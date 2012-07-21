@@ -1,45 +1,109 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+### Options
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-export ZSH_THEME="manico"
+autoload -U colors && colors
+autoload -U compinit && compinit
+autoload -U add-zsh-hook
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
+setopt prompt_subst
 
-# Comment this out to disable weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+### Prompt
 
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want disable red dots displayed while waiting for completion
-# DISABLE_COMPLETION_WAITING_DOTS="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-### Ruby Version Manager
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-function zle-line-init zle-keymap-select {
-    RPS1="%{$fg_bold[green]%}${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}%{$reset_color%}"
-    RPS2=$RPS1
-    zle reset-prompt
+# From: http://www.reddit.com/r/zsh/comments/vopro/truncated_path_in_zsh_prompt/c5ecfb3
+function collapse_pwd {
+  echo $(pwd | sed -e "s,^$HOME,~,")
 }
-zle -N zle-line-init
-zle -N zle-keymap-select
 
-bindkey -v
+# TODO: Prevent vars from being in global namespace
+function truncated_pwd() {
+  n=$1 # n = number of directories to show in full (n = 3, /a/b/c/dee/ee/eff)
+  path2=$(collapse_pwd)
+
+  # split our path on /
+  dirs=("${(s:/:)path2}")
+  dirs_length=$#dirs
+
+  if [[ $dirs_length -ge $n ]]; then
+    # we have more dirs than we want to show in full, so compact those down
+    ((max=dirs_length - n))
+    for (( i = 1; i <= $max; i++ )); do
+      step="$dirs[$i]"
+      if [[ -z $step ]]; then
+        continue
+      fi
+      if [[ $step =~ "^\." ]]; then
+        dirs[$i]=$step[0,2] #make .mydir => .m
+      else
+        dirs[$i]=$step[0,1] # make mydir => m
+      fi
+
+    done
+  fi
+
+  echo ${(j:/:)dirs}
+}
+
+PROMPT='%{%B%F{yellow}%}%n%{%b%f%}@%{%B%F{yellow}%}%m %{%F{blue}%}$(truncated_pwd 3)%{%b%f%} %% '
+
+### Terminal Window Title
+
+function title {
+  case $TERM in
+    xterm*)
+      print -Pn "\e]0;$1\a"
+      ;;
+    screen)
+      print -Pn "\ek$1:q\e\\"
+      ;;
+  esac
+}
+
+function my_term_title_preexec {
+  emulate -L zsh
+  setopt extended_glob
+  # cmd name only, or if this is sudo or ssh, the next cmd
+  local CMD=${1[(wr)^(*=*|sudo|ssh|-*)]}
+
+  title "$CMD"
+}
+
+function my_term_title_precmd {
+  title $(truncated_pwd 1)
+}
+
+add-zsh-hook precmd my_term_title_precmd
+add-zsh-hook preexec my_term_title_preexec
+
+### Vi Mode
+#
+#function zle-line-init zle-keymap-select {
+#    RPS1="%{$fg_bold[green]%}${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}%{$reset_color%}"
+#    RPS2=$RPS1
+#    zle reset-prompt
+#}
+#zle -N zle-line-init
+#zle -N zle-keymap-select
+#
+#bindkey -v
+
+### Software Configuration
+
+# Go
+export GOPATH="$HOME/.go"
+
+# RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+### Aliases
+
+alias tmux='tmux -2'
+alias grep='grep --color'
+alias ls='ls --color'
+alias ll='ls -lh'
+alias la='ls -A'
 
 ### Environmental Variables
+
 export EDITOR="vim"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
