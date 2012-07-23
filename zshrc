@@ -95,15 +95,17 @@ export GOPATH="$HOME/.go"
 
 ### Aliases
 
-alias tmux='tmux -2'
 alias grep='grep --color'
 alias ls='ls --color'
 alias ll='ls -lh'
 alias la='ls -A'
 
+alias t="todo.sh"
+
 ### Environmental Variables
 
+# TODO: Make sure the terminal supports this first
+export TERM="xterm-256color"
+
 export EDITOR="vim"
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
+export PATH="$PATH:$HOME/bin"
