@@ -6,6 +6,15 @@ autoload -U add-zsh-hook
 
 setopt prompt_subst
 
+### History
+
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+
+setopt inc_append_history
+setopt share_history
+
 ### Prompt
 
 # From: http://www.reddit.com/r/zsh/comments/vopro/truncated_path_in_zsh_prompt/c5ecfb3
@@ -85,6 +94,12 @@ add-zsh-hook preexec my_term_title_preexec
 #
 #bindkey -v
 
+### Key Bindings
+
+bindkey -v
+bindkey '\e[3~' delete-char
+bindkey '^R' history-incremental-search-backward
+
 ### Software Configuration
 
 # Go
@@ -93,10 +108,25 @@ export GOPATH="$HOME/.go"
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-### Aliases
+# Android SDK
+
+export ANDROID_SDK="$HOME/lib/android-sdks"
+
+# Color output
+
+case "${OSTYPE}" in
+  darwin*)
+    export CLICOLOR=1
+    ;;
+  linux*)
+    alias ls='ls --color'
+    ;;
+esac
 
 alias grep='grep --color'
-alias ls='ls --color'
+
+### Aliases
+
 alias ll='ls -lh'
 alias la='ls -A'
 
@@ -105,7 +135,9 @@ alias t="todo.sh"
 ### Environmental Variables
 
 # TODO: Make sure the terminal supports this first
-export TERM="xterm-256color"
+# TODO: This should be depended on the current TERM, so we don't set
+# screen-256color to xterm-256color
+#export TERM="xterm-256color"
 
 export EDITOR="vim"
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools"
