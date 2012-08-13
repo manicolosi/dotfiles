@@ -65,7 +65,9 @@ filetype plugin indent on
 "au FileType ruby setl tabstop=2 shiftwidth=2
 
 " tslime
-let g:ScreenImpl = 'Tmux' " Use tmux
+vmap <C-c><C-c> <Plug>SendSelectToTmux
+nmap <C-c><C-c> <Plug>NormalModeSendToTmux
+nmap <C-c>r     <Plug>SetTmuxVars
 
 " VimClojure
 let vimclojureRoot = $HOME."/.vim/bundle/vimclojure-2.3.0"
@@ -74,9 +76,3 @@ let vimclojure#HighlightContrib=1
 let vimclojure#DynamicHighlighting=1
 let vimclojure#ParenRainbow=1
 let vimclojure#FuzzyIndent=1
-
-" Screen
-nmap <silent> <Leader>sc :ScreenShell clj<CR>
-nmap <silent> <Leader>sq :ScreenQuit<CR>
-nmap <silent> <Leader>ss :ScreenSend<CR>
-vmap <silent> <Leader>ss :ScreenSend<CR>
