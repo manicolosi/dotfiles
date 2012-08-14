@@ -140,4 +140,5 @@ alias t="todo.sh"
 #export TERM="xterm-256color"
 
 export EDITOR="vim"
-export PATH="$PATH:$HOME/bin:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools"
+export PATH="$HOME/bin:/usr/local/bin:$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools"
+typeset -U PATH

@@ -17,7 +17,8 @@ if has("gui_running")
   "set lines=50 columns=120
 endif
 
-set guifont=inconsolata\ 12
+set guifont=inconsolata:h16
+
 
 " Hilight searches and do incremental searches. Also ignore case for searches.
 set hlsearch
@@ -25,7 +26,7 @@ set incsearch
 set ignorecase
 set smartcase
 
-nmap <silent> <leader>n :silent:nohlsearch<CR>
+nmap <silent> <leader>nh :silent:nohlsearch<CR>
 
 " Tab and Shift-Tab to switch buffer
 nmap <TAB>   :bn<CR>
@@ -63,6 +64,9 @@ set tabstop=2 shiftwidth=2
 filetype plugin indent on
 
 "au FileType ruby setl tabstop=2 shiftwidth=2
+
+" NERDTree
+nmap <leader>nt :NERDTreeToggle<CR>
 
 " tslime
 vmap <C-c><C-c> <Plug>SendSelectToTmux
