@@ -22,3 +22,9 @@
 [submodule "vim/bundle/vim-markdown"]
 	path = vim/bundle/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
+[submodule "vim/bundle/vim-pad"]
+	path = vim/bundle/vim-pad
+	url = https://github.com/vim-scripts/vim-pad.git
+[submodule "vim/bundle/vimoutliner"]
+	path = vim/bundle/vimoutliner
+	url = https://github.com/vimoutliner/vimoutliner.git
