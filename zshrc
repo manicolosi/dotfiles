@@ -83,16 +83,14 @@ add-zsh-hook precmd my_term_title_precmd
 add-zsh-hook preexec my_term_title_preexec
 
 ### Vi Mode
-#
-#function zle-line-init zle-keymap-select {
-#    RPS1="%{$fg_bold[green]%}${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}%{$reset_color%}"
-#    RPS2=$RPS1
-#    zle reset-prompt
-#}
-#zle -N zle-line-init
-#zle -N zle-keymap-select
-#
-#bindkey -v
+
+function zle-line-init zle-keymap-select {
+    RPS1="%{$fg_bold[green]%}${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}%{$reset_color%}"
+    RPS2=$RPS1
+    zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 ### Key Bindings
 
