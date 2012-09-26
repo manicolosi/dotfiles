@@ -17,7 +17,7 @@ if has("gui_running")
   "set lines=50 columns=120
 endif
 
-set guifont=inconsolata:h16
+set guifont=inconsolata-dz:h14
 
 
 " Hilight searches and do incremental searches. Also ignore case for searches.
@@ -69,12 +69,12 @@ filetype plugin indent on
 nmap <leader>nt :NERDTreeToggle<CR>
 
 " tslime
-vmap <C-c><C-c> <Plug>SendSelectToTmux
+vmap <C-c><C-c> <Plug>SendSelectionToTmux
 nmap <C-c><C-c> <Plug>NormalModeSendToTmux
-nmap <C-c>r     <Plug>SetTmuxVars
+nmap <C-c>r <Plug>SetTmuxVars
 
 " VimClojure
-let vimclojureRoot = $HOME."/.vim/bundle/vimclojure-2.3.0"
+let vimclojureRoot = $HOME."/.vim/bundle/vimclojure"
 let vimclojure#HighlightBuiltins=1
 let vimclojure#HighlightContrib=1
 let vimclojure#DynamicHighlighting=1
