@@ -3,8 +3,10 @@
 autoload -U colors && colors
 autoload -U compinit && compinit
 autoload -U add-zsh-hook
+autoload -Uz vcs_info
 
-setopt prompt_subst
+setopt prompt_subst            # Allow substitutions in prompt
+setopt transient_rprompt       # Hide rprompt after command
 
 ### History
 
@@ -51,7 +53,23 @@ function truncated_pwd() {
   echo ${(j:/:)dirs}
 }
 
-PROMPT='%{%B%F{yellow}%}%n%{%b%f%}@%{%B%F{yellow}%}%m %{%F{blue}%}$(truncated_pwd 3)%{%b%f%} %% '
+zstyle ':vcs_info:*' stagedstr '%F{green}●'
+zstyle ':vcs_info:*' unstagedstr '%F{yellow}●'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' enable git svn
+
+function zsh_git_prompt_precmd {
+  if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+    zstyle ':vcs_info:*' formats '%K{black}%u%c %F{green}%b%k '
+  } else {
+    zstyle ':vcs_info:*' formats '%K{black}%F{red}●%u%c %F{green}%b%k '
+  }
+
+  vcs_info
+}
+precmd_functions+='zsh_git_prompt_precmd'
+
+PROMPT='${vcs_info_msg_0_}%{$reset_color%}%{%b%f%}%{%F{blue}%}$(truncated_pwd 3)%f%b ${VI_MODE_PROMPT} '
 
 ### Terminal Window Title
 
@@ -84,12 +102,15 @@ add-zsh-hook preexec my_term_title_preexec
 
 ### Vi Mode
 
+VI_MODE_CMD='%F{yellow}#'
+VI_MODE_INS='%F{white}%%'
+VI_MODE_PROMPT=$VI_MODE_INS
+
 # When Zsh starts up this isn't display until the next prompt. Also if cmd
 # mode is entered and then the next prompt is shown, it still shows that cmd
 # mode is enabled even though its in insert mode.
 function zle-line-init zle-keymap-select {
-    RPS1="%{$fg_bold[green]%}${${KEYMAP/vicmd/NORMAL}/(main|viins)/INSERT}%{$reset_color%}"
-    RPS2=$RPS1
+    VI_MODE_PROMPT="${${KEYMAP/vicmd/${VI_MODE_CMD}}/(main|viins)/${VI_MODE_INS}}%{$reset_color%}"
     zle reset-prompt
 }
 
