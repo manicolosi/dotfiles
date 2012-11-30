@@ -133,7 +133,7 @@ export GOPATH="$HOME/.go"
 
 # Android SDK
 
-export ANDROID_SDK="$HOME/lib/android-sdks"
+export ANDROID_SDK="$HOME/lib/android-sdk"
 
 # Color output
 
@@ -165,3 +165,11 @@ alias t="todo.sh"
 export EDITOR="vim"
 export PATH="$HOME/bin:/usr/local/bin:$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools"
 typeset -U PATH
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+### Syntax Highlighting
+
+source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+ZSH_HIGHLIGHT_STYLES[path]='fg=blue,bold'
