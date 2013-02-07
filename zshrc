@@ -172,4 +172,4 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-ZSH_HIGHLIGHT_STYLES[path]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
