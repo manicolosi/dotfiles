@@ -110,7 +110,7 @@ VI_MODE_PROMPT=$VI_MODE_INS
 # mode is entered and then the next prompt is shown, it still shows that cmd
 # mode is enabled even though its in insert mode.
 function zle-line-init zle-keymap-select {
-    VI_MODE_PROMPT="${${KEYMAP/vicmd/${VI_MODE_CMD}}/(main|viins)/${VI_MODE_INS}}%{$reset_color%}"
+    VI_MODE_PROMPT="${${KEYMAP/vicmd/${VI_MODE_CMD}}/(main|viins)/${VI_MODE_INS}}%f"
     zle reset-prompt
 }
 
@@ -153,8 +153,6 @@ alias grep='grep --color'
 alias ll='ls -lh'
 alias la='ls -A'
 
-alias t="todo.sh"
-
 ### Environmental Variables
 
 # TODO: Make sure the terminal supports this first
@@ -170,6 +168,7 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 ### Syntax Highlighting
 
-source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ZSH_HIGHLIGHT_STYLES[path]='fg=blue'

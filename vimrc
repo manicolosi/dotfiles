@@ -15,13 +15,13 @@ if has("gui_running")
   set guioptions-=r " Remove scroll bar
   set guioptions-=L " Remove scroll bar
 
-  set guifont=inconsolata-dz:h12
-
-  set cursorline                       " Highlight current line
+  set guifont="Inconsolata 12"
 
   " Highlight column 81 and 121 and up
   let &colorcolumn="81,".join(range(121,999),",")
 endif
+
+set cursorline                       " Highlight current line
 
 " Hilight searches and do incremental searches. Also ignore case for searches.
 set hlsearch
@@ -59,6 +59,7 @@ set tabstop=2
 filetype plugin indent on
 
 au FileType java setl sw=4 ts=4
+au FileType sml setl sw=4 ts=4
 
 """ BINDINGS
 
