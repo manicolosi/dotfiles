@@ -75,10 +75,10 @@ PROMPT='${vcs_info_msg_0_}%{$reset_color%}%{%b%f%}%{%F{blue}%}$(truncated_pwd 3)
 
 function title {
   case $TERM in
-    xterm*)
+    xterm*|rxvt*)
       print -Pn "\e]0;$1\a"
       ;;
-    screen)
+    screen*)
       print -Pn "\ek$1:q\e\\"
       ;;
   esac
@@ -95,6 +95,14 @@ function my_term_title_preexec {
 
 function my_term_title_precmd {
   title $(truncated_pwd 1)
+  case $TERM in
+    xterm*|rxvt*)
+      title "%n@%m:$(truncated_pwd 3)"
+      ;;
+    screen*)
+      title "$(truncated_pwd 1)"
+      ;;
+  esac
 }
 
 add-zsh-hook precmd my_term_title_precmd
@@ -147,6 +155,13 @@ case "${OSTYPE}" in
 esac
 
 alias grep='grep --color'
+
+# GPG Agent
+#if [ -f "$HOME/.gpg-agent-info" ]; then
+#  source "$HOME/.gpg-agent-info"
+#  export GPG_AGENT_INFO
+#  export SSH_AUTH_SOCK
+#fi
 
 ### Aliases
 
