@@ -60,16 +60,16 @@ zstyle ':vcs_info:*' enable git svn
 
 function zsh_git_prompt_precmd {
   if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-    zstyle ':vcs_info:*' formats '%K{black}%u%c %F{green}%b%k '
+    zstyle ':vcs_info:*' formats '%u%c %F{green}%b%k '
   } else {
-    zstyle ':vcs_info:*' formats '%K{black}%F{red}●%u%c %F{green}%b%k '
+    zstyle ':vcs_info:*' formats '%F{red}●%u%c %F{green}%b%k '
   }
 
   vcs_info
 }
 precmd_functions+='zsh_git_prompt_precmd'
 
-PROMPT='${vcs_info_msg_0_}%{$reset_color%}%{%b%f%}%{%F{blue}%}$(truncated_pwd 3)%f%b ${VI_MODE_PROMPT} '
+PROMPT='${vcs_info_msg_0_# }%{$reset_color%}%{%b%f%}%{%F{blue}%}$(truncated_pwd 3)%f%b ${VI_MODE_PROMPT} '
 
 ### Terminal Window Title
 
@@ -121,7 +121,19 @@ zle -N zle-keymap-select
 
 bindkey -v
 bindkey '\e[3~' delete-char
-bindkey '^R' history-incremental-search-backward
+bindkey "^R" history-incremental-search-backward
+
+# Allow deleting past the start char of insert mode
+# http://www.zsh.org/mla/users/2009/msg00812.html
+bindkey "^H" backward-delete-char
+bindkey "^?" backward-delete-char
+bindkey "^W" backward-kill-word
+bindkey "^U" backward-kill-line
+bindkey "^K" kill-line
+
+# Emacs line keybindings in insert mode
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
 
 ### Software Configuration
 
