@@ -1,0 +1,20 @@
+music_directory    "/mnt/media/Audio/Music/Mark"
+playlist_directory "/home/mark/.mpd/playlists"
+db_file            "/home/mark/.mpd/database"
+log_file           "/home/mark/.mpd/log"
+pid_file           "/home/mark/.mpd/pid"
+state_file         "/home/mark/.mpd/state"
+
+bind_to_address "127.0.0.1"
+
+audio_output {
+    type  "pulse"
+    name  "pulse audio"
+}
+
+audio_output {
+    type  "fifo"
+    name  "fifo output"
+    path  "/home/mark/.mpd/fifo"
+}
+
