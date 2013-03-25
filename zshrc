@@ -69,7 +69,13 @@ function zsh_git_prompt_precmd {
 }
 precmd_functions+='zsh_git_prompt_precmd'
 
-PROMPT='${vcs_info_msg_0_# }%{$reset_color%}%{%b%f%}%{%F{blue}%}$(truncated_pwd 3)%f%b ${VI_MODE_PROMPT} '
+function prompt_user_at_host {
+  if [ -n "${SSH_CONNECTION}" ]; then
+    echo "%{%F{yellow}%}%n%{$reset_color%}@%{%F{yellow}%}%m%{$reset_color%} "
+  fi
+}
+
+PROMPT='$(prompt_user_at_host)${vcs_info_msg_0_# }%{$reset_color%}%{%b%f%}%{%F{blue}%}$(truncated_pwd 3)%f%b ${VI_MODE_PROMPT} '
 
 ### Terminal Window Title
 
