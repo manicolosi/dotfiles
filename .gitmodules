@@ -28,3 +28,6 @@
 [submodule "vim/bundle/vimoutliner"]
 	path = vim/bundle/vimoutliner
 	url = https://github.com/vimoutliner/vimoutliner.git
+[submodule "vim/bundle/go.vim"]
+	path = vim/bundle/go.vim
+	url = https://github.com/fsouza/go.vim.git
