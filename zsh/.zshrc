@@ -5,8 +5,9 @@ autoload -U compinit && compinit
 autoload -U add-zsh-hook
 autoload -Uz vcs_info
 
-setopt prompt_subst            # Allow substitutions in prompt
-setopt transient_rprompt       # Hide rprompt after command
+setopt prompt_subst        # Allow substitutions in prompt
+setopt transient_rprompt   # Hide rprompt after command
+setopt no_list_beep
 
 ### History
 
@@ -14,8 +15,12 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
-setopt inc_append_history
-setopt share_history
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
 
 ### Prompt
 
@@ -149,17 +154,40 @@ bindkey "^K" kill-line
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 
+# http://www.zsh.org/mla/users/2009/msg01038.html
+# Force file completion with C-x f
+zle -C complete-files complete-word _generic
+zstyle ':completion:complete-files:*' completer _files
+bindkey '^xf' complete-files
+
+### Environmental Variables
+
+# TODO: Make sure the terminal supports this first
+# TODO: This should be depended on the current TERM, so we don't set
+# screen-256color to xterm-256color
+#export TERM="xterm-256color"
+
+export EDITOR="vim"
+export PATH="$HOME/bin:/usr/local/bin:$PATH"
+typeset -U PATH
+
 ### Software Configuration
 
 # Go
 export GOPATH="$HOME/.go"
 
 # RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+#PATH=$PATH:$HOME/.rvm/bin
+
+# Rbenv
+PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # Android SDK
 
 export ANDROID_SDK="$HOME/lib/android-sdk"
+export PATH="$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools"
 
 # Color output
 
@@ -183,21 +211,17 @@ alias grep='grep --color'
 
 ### Aliases
 
+# Unix-fu
 alias ll='ls -lh'
 alias la='ls -A'
 
-### Environmental Variables
+# Git
+alias gst='git status'
+alias gp='git push origin HEAD'
 
-# TODO: Make sure the terminal supports this first
-# TODO: This should be depended on the current TERM, so we don't set
-# screen-256color to xterm-256color
-#export TERM="xterm-256color"
-
-export EDITOR="vim"
-export PATH="$HOME/bin:/usr/local/bin:$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools"
-typeset -U PATH
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# Ruby
+alias be='bundle exec'
+alias bake='bundle exec rake'
 
 ### Syntax Highlighting
 
