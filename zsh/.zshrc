@@ -184,6 +184,9 @@ export GOPATH="$HOME/.go"
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+# Python
+PATH="$HOME/.local/bin:$PATH"
+
 # Android SDK
 
 export ANDROID_SDK="$HOME/lib/android-sdk"
