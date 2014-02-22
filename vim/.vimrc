@@ -8,6 +8,7 @@ Bundle "gmarik/vundle"
 Bundle "kien/ctrlp.vim"
 Bundle "tpope/vim-surround"
 Bundle "tpope/vim-repeat"
+Bundle "mileszs/ack.vim"
 
 Bundle 'bling/vim-airline'
 
