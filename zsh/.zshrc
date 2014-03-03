@@ -254,7 +254,11 @@ project() {
   if echo $SESSIONS | grep $PROJECT > /dev/null; then
     tmux attach -t $PROJECT
   else
-    cd $PROJECT_DIR
-    tmux new-session -s $PROJECT
+    ARGS=""
+    if [ -f "$PROJECT_DIR/.teamocil.yml" ]; then
+      ARGS="teamocil --layout $PROJECT_DIR/.teamocil.yml"
+    fi
+
+    tmux new-session -s $PROJECT -c $PROJECT_DIR $ARGS
   fi
 }
