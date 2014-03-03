@@ -239,7 +239,7 @@ ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
 project() {
   PROJECT="$1"
   PROJECT_DIR="$HOME/Projects/$1"
-  SESSIONS=$(tmux list-sessions | cut -d: -f1)
+  SESSIONS=$(tmux list-sessions 2> /dev/null | cut -d: -f1)
 
   if [ -z $PROJECT ]; then
     echo $SESSIONS
