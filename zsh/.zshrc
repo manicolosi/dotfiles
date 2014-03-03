@@ -232,3 +232,29 @@ alias bake='bundle exec rake'
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
+
+### Functions
+
+# Opens project in an existing or new tmux session
+project() {
+  PROJECT="$1"
+  PROJECT_DIR="$HOME/Projects/$1"
+  SESSIONS=$(tmux list-sessions | cut -d: -f1)
+
+  if [ -z $PROJECT ]; then
+    echo $SESSIONS
+    return
+  fi
+
+  if [ ! -d $PROJECT_DIR ]; then
+    echo "$PROJECT_DIR does not exist!"
+    return
+  fi
+
+  if echo $SESSIONS | grep $PROJECT > /dev/null; then
+    tmux attach -t $PROJECT
+  else
+    cd $PROJECT_DIR
+    tmux new-session -s $PROJECT
+  fi
+}
