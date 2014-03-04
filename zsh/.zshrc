@@ -240,25 +240,24 @@ project() {
   PROJECT="$1"
   PROJECT_DIR="$HOME/Projects/$1"
   SESSIONS=$(tmux list-sessions 2> /dev/null | cut -d: -f1)
+  ARGS=""
 
   if [ -z $PROJECT ]; then
     echo $SESSIONS
     return
   fi
 
-  if [ ! -d $PROJECT_DIR ]; then
-    echo "$PROJECT_DIR does not exist!"
-    return
+  if [ -d $PROJECT_DIR ]; then
+    ARGS="$ARGS -c $PROJECT_DIR"
   fi
 
   if echo $SESSIONS | grep $PROJECT > /dev/null; then
     tmux attach -t $PROJECT
   else
-    ARGS=""
     if [ -f "$PROJECT_DIR/.teamocil.yml" ]; then
-      ARGS="teamocil --layout $PROJECT_DIR/.teamocil.yml"
+      ARGS="$ARGS teamocil --layout $PROJECT_DIR/.teamocil.yml"
     fi
 
-    tmux new-session -s $PROJECT -c $PROJECT_DIR $ARGS
+    tmux new-session -s $PROJECT $ARGS
   fi
 }
