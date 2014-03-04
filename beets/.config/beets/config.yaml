@@ -1,0 +1,6 @@
+directory: /mnt/media/Audio/Music
+plugins: chroma fromfilename fetchart
+import:
+  move: yes
+  quiet_fallback: skip
+  log: ~/.cache/beets/import.log
