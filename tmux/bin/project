@@ -1,0 +1,26 @@
+#!/bin/sh
+
+PROJECT="$1"
+PROJECT_DIR="$HOME/Projects/$1"
+SESSIONS=$(tmux list-sessions 2> /dev/null | cut -d: -f1)
+CMD=""
+
+if [ -z $PROJECT ]; then
+  echo "$SESSIONS"
+  exit
+fi
+
+if [ -d $PROJECT_DIR ]; then
+  cd $PROJECT_DIR
+fi
+
+if echo $SESSIONS | grep $PROJECT > /dev/null; then
+  tmux attach -t $PROJECT
+else
+  if [ -f "$PROJECT_DIR/.teamocil.yml" ]; then
+    CMD="teamocil --layout $PROJECT_DIR/.teamocil.yml"
+  fi
+
+  echo tmux new-session -s $PROJECT $CMD
+  tmux new-session -s $PROJECT $CMD
+fi
