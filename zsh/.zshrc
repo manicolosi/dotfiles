@@ -232,33 +232,3 @@ alias bake='bundle exec rake'
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
-
-### Functions
-
-# Opens project in an existing or new tmux session
-function project() {
-  local PROJECT="$1"
-  local PROJECT_DIR="$HOME/Projects/$1"
-  local SESSIONS=$(tmux list-sessions 2> /dev/null | cut -d: -f1)
-  local CMD=""
-
-  if [ -z $PROJECT ]; then
-    echo $SESSIONS
-    return
-  fi
-
-  if [ -d $PROJECT_DIR ]; then
-    cd $PROJECT_DIR
-  fi
-
-  if echo $SESSIONS | grep $PROJECT > /dev/null; then
-    tmux attach -t $PROJECT
-  else
-    if [ -f "$PROJECT_DIR/.teamocil.yml" ]; then
-      CMD="teamocil --layout $PROJECT_DIR/.teamocil.yml"
-    fi
-
-    echo tmux new-session -s $PROJECT $CMD
-    tmux new-session -s $PROJECT $CMD
-  fi
-}
