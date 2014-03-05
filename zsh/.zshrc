@@ -236,11 +236,11 @@ ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
 ### Functions
 
 # Opens project in an existing or new tmux session
-project() {
-  PROJECT="$1"
-  PROJECT_DIR="$HOME/Projects/$1"
-  SESSIONS=$(tmux list-sessions 2> /dev/null | cut -d: -f1)
-  ARGS=""
+function project() {
+  local PROJECT="$1"
+  local PROJECT_DIR="$HOME/Projects/$1"
+  local SESSIONS=$(tmux list-sessions 2> /dev/null | cut -d: -f1)
+  local CMD=""
 
   if [ -z $PROJECT ]; then
     echo $SESSIONS
@@ -248,16 +248,17 @@ project() {
   fi
 
   if [ -d $PROJECT_DIR ]; then
-    ARGS="$ARGS -c $PROJECT_DIR"
+    cd $PROJECT_DIR
   fi
 
   if echo $SESSIONS | grep $PROJECT > /dev/null; then
     tmux attach -t $PROJECT
   else
     if [ -f "$PROJECT_DIR/.teamocil.yml" ]; then
-      ARGS="$ARGS teamocil --layout $PROJECT_DIR/.teamocil.yml"
+      CMD="teamocil --layout $PROJECT_DIR/.teamocil.yml"
     fi
 
-    tmux new-session -s $PROJECT $ARGS
+    echo tmux new-session -s $PROJECT $CMD
+    tmux new-session -s $PROJECT $CMD
   fi
 }
