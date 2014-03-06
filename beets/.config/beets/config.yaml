@@ -1,6 +1,8 @@
 directory: /mnt/media/Audio/Music
-plugins: chroma fromfilename fetchart discogs
+plugins: chroma fromfilename fetchart discogs lastgenre web
 import:
   move: yes
   quiet_fallback: skip
   log: ~/.cache/beets/import.log
+lastgenre:
+  canonical: ''
