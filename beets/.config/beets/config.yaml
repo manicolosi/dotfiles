@@ -1,5 +1,5 @@
 directory: /mnt/media/Audio/Music
-plugins: chroma fromfilename fetchart discogs lastgenre web
+plugins: chroma fromfilename fetchart discogs lastgenre web convert
 import:
   move: yes
   quiet_fallback: skip

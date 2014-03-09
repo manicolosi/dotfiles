@@ -1,0 +1,5 @@
+visualizer_fifo_path = "/home/mark/.cache/mpd/fifo"
+visualizer_output_name = "fifo outptu"
+visualizer_sync_interval = "1"
+visualizer_type = "spectrum"
+user_interface = "alternative"
