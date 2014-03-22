@@ -44,6 +44,7 @@ Bundle "tpope/vim-fugitive"
 "Bundle 'jpalardy/vim-slime'
 "Bundle 'tpope/vim-dispatch'
 Bundle "jgdavey/tslime.vim"
+Bundle "wellle/tmux-complete.vim"
 
 " Turn on syntax hilighting.
 syntax enable
