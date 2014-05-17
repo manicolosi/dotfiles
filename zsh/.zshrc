@@ -160,6 +160,11 @@ zle -C complete-files complete-word _generic
 zstyle ':completion:complete-files:*' completer _files
 bindkey '^xf' complete-files
 
+# Bash-style command editing with C-x-e
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
 ### Environmental Variables
 
 # TODO: Make sure the terminal supports this first
