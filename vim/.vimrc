@@ -2,15 +2,15 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+call vundle#begin()
 
-Bundle "gmarik/vundle"
-Bundle "kien/ctrlp.vim"
-Bundle "tpope/vim-surround"
-Bundle "tpope/vim-repeat"
-Bundle "mileszs/ack.vim"
+Plugin 'gmarik/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'mileszs/ack.vim'
 
-Bundle 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 
 colorscheme Tomorrow-Night-Mine
 
@@ -19,33 +19,35 @@ let g:airline_right_sep=''
 let g:airline_theme='wombat'
 
 " SnipMate and its depedencies
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
 
 " Clojure
-Bundle "guns/vim-clojure-static"
-Bundle "tpope/vim-fireplace"
-Bundle "kien/rainbow_parentheses.vim"
+Plugin 'guns/vim-clojure-static'
+Plugin 'tpope/vim-fireplace'
+Plugin 'kien/rainbow_parentheses.vim'
 
 let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let']
 
 " Other languages
-Bundle "tikhomirov/vim-glsl"
-Bundle "fsouza/go.vim"
-Bundle "vim-ruby/vim-ruby"
-Bundle "ledger/vim-ledger"
-Bundle "tpope/vim-markdown"
+Plugin 'tikhomirov/vim-glsl'
+Plugin 'fsouza/go.vim'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'ledger/vim-ledger'
+Plugin 'tpope/vim-markdown'
 
 " Git
-Bundle "tpope/vim-fugitive"
+Plugin 'tpope/vim-fugitive'
 
 " Tmux
-"Bundle 'jpalardy/vim-slime'
-"Bundle 'tpope/vim-dispatch'
-Bundle "jgdavey/tslime.vim"
-Bundle "wellle/tmux-complete.vim"
-Bundle 'christoomey/vim-tmux-navigator'
+"Plugin 'jpalardy/vim-slime'
+"Plugin 'tpope/vim-dispatch'
+Plugin 'jgdavey/tslime.vim'
+Plugin 'wellle/tmux-complete.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+
+call vundle#end()
 
 " Turn on syntax hilighting.
 syntax enable
