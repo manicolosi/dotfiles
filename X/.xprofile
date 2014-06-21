@@ -16,5 +16,8 @@ export SSH_AGENT_PID
 
 #systemd --user &
 xrdb -merge $HOME/.Xresources
+for resource in $HOME/.Xresources.d/*; do
+  xrdb -merge $resource
+done
 
 xset b off
