@@ -1,22 +1,42 @@
 #!/bin/bash
 
-BASE_DIR=$(dirname $0)
-cd $BASE_DIR
+readonly BASE_DIR=$(dirname $0)
+readonly TARGET="$HOME"
+readonly ARGS="$@"
 
-TARGET=$HOME
-PACKAGES=$(ls -d */ | xargs realpath --relative-to=$PWD)
+install_package() {
+  local package=$1
 
-for PACKAGE in $PACKAGES; do
-  i=$(( ${i:0} + 1 ))
-  color=$(( i % 6 + 31 ))
+  echo -n "Stowing ${package}... "
 
-  echo -ne "\e[${color}m"
-
-  echo "Stowing $PACKAGE..."
-  stow --ignore="install.sh" --target="$TARGET" "$PACKAGE"
-
-  if [ -x "$PACKAGE/install.sh" ]; then
-    echo "Running install script"
-    ./$PACKAGE/install.sh
+  if [ ! -d "$package" ]; then
+    echo -e "Directory not found!"
+    return 255
   fi
-done
+
+  stow --ignore="install.sh" --target="$TARGET" "$package"
+
+  if [ -x "$package/install.sh" ]; then
+    echo -n "Running install script..."
+    ./$package/install.sh
+  fi
+
+  echo
+}
+
+main() {
+  cd $BASE_DIR
+
+  local packages
+  if [ -n "$ARGS" ]; then
+    packages="$ARGS"
+  else
+    packages=$(ls -d */ | xargs realpath --relative-to=$PWD)
+  fi
+
+  for package in $packages; do
+    install_package $package
+  done
+}
+
+main
