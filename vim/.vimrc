@@ -5,18 +5,20 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
+
+" Text editing enhancements
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+
+" Tools
+Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
 
+" Look
+Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
-
-colorscheme Tomorrow-Night-Mine
-
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_theme='wombat'
 
 " SnipMate and its depedencies
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -26,13 +28,7 @@ Plugin 'garbas/vim-snipmate'
 " Clojure
 Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-fireplace'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'vim-scripts/paredit.vim'
-
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+Plugin 'amdt/vim-niji'
 
 let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let']
 
@@ -42,9 +38,7 @@ Plugin 'fsouza/go.vim'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'ledger/vim-ledger'
 Plugin 'tpope/vim-markdown'
-
-" Git
-Plugin 'tpope/vim-fugitive'
+Plugin 'kchmck/vim-coffee-script'
 
 " Tmux
 "Plugin 'jpalardy/vim-slime'
@@ -54,6 +48,14 @@ Plugin 'wellle/tmux-complete.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 
 call vundle#end()
+
+set background=dark
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-default
+
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='base16'
 
 " Turn on syntax hilighting.
 syntax enable
@@ -73,7 +75,7 @@ endif
 
 set autoread
 set laststatus=2
-set cursorline                       " Highlight current line
+set cursorline
 
 " Hilight searches and do incremental searches. Also ignore case for searches.
 set hlsearch
