@@ -167,11 +167,6 @@ bindkey -M vicmd v edit-command-line
 
 ### Environmental Variables
 
-# TODO: Make sure the terminal supports this first
-# TODO: This should be depended on the current TERM, so we don't set
-# screen-256color to xterm-256color
-#export TERM="xterm-256color"
-
 export EDITOR="vim"
 export PATH="$HOME/bin:/usr/local/bin:$PATH"
 typeset -U PATH
