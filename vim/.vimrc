@@ -29,6 +29,7 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-fireplace'
 Plugin 'amdt/vim-niji'
+Plugin 'vim-scripts/paredit.vim'
 
 let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let']
 
