@@ -232,3 +232,9 @@ alias bake='bundle exec rake'
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
+
+# Load additional zsh configuration
+
+for config in $HOME/.{zsh,shell}.d/*(N); do
+  source $config
+done
