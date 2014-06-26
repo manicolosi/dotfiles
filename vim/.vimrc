@@ -17,15 +17,11 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-unimpaired'
 
 " Look
 Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
-
-" SnipMate and its depedencies
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
 
 " Clojure
 Plugin 'guns/vim-clojure-static'
