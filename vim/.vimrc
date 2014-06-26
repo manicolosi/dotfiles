@@ -81,6 +81,7 @@ filetype plugin indent on
 set autoread
 set laststatus=2
 set cursorline
+set backspace=indent,eol,start
 
 " Hilight searches and do incremental searches. Also ignore case for searches.
 set hlsearch
@@ -96,7 +97,7 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " Files ignored when expanding wildcards. Also ignored by CtrlP.
-set wildignore+=*.class,*/out/*,*/target/*
+set wildignore+=*.class
 set wildmode=longest,full
 
 set number
@@ -110,6 +111,7 @@ set autoindent
 set smartindent
 set smarttab
 set expandtab
+set formatoptions-=t
 
 set textwidth=80
 set shiftwidth=2
