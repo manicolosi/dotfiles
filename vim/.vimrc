@@ -94,6 +94,8 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " Files ignored when expanding wildcards. Also ignored by CtrlP.
 set wildignore+=*.class
+set wildignore+=*/out/*
+set wildignore+=*/target/*
 set wildmode=longest,full
 
 set number
@@ -125,6 +127,9 @@ let mapleader = ","
 
 " Turn off highlighted search
 nnoremap <Leader>c :nohlsearch<CR>
+
+" CtrlP
+nnoremap <leader>p :CtrlPBuffer<CR>
 
 " Fireplace
 nnoremap <leader>rt :Require<CR>:RunTests<CR>
