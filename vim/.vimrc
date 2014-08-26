@@ -125,6 +125,8 @@ au FileType go setl sw=4 ts=4
 " Set the leader
 let mapleader = ","
 
+command! DroidConnect Connect nrepl://localhost:9999
+
 " Turn off highlighted search
 nnoremap <Leader>c :nohlsearch<CR>
 
