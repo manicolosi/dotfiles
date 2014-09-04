@@ -199,7 +199,7 @@ case "${OSTYPE}" in
     export CLICOLOR=1
     ;;
   linux*)
-    alias ls='ls --color'
+    alias ls='ls --color=auto'
     ;;
 esac
 
