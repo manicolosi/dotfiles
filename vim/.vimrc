@@ -120,12 +120,9 @@ au FileType sml setl sw=4 ts=4
 au FileType lua setl sw=4 ts=4
 au FileType go setl sw=4 ts=4
 
-""" Bindings
+""" Maps and Commands
 
-" Set the leader
 let mapleader = ","
-
-command! DroidConnect Connect nrepl://localhost:9999
 
 " Turn off highlighted search
 nnoremap <Leader>c :nohlsearch<CR>
@@ -134,6 +131,14 @@ nnoremap <Leader>c :nohlsearch<CR>
 nnoremap <leader>p :CtrlPBuffer<CR>
 
 " Fireplace
+command! DroidConnect Connect nrepl://localhost:9999
+
+nnoremap <leader>C :Connect<CR>1<CR><CR>
+nnoremap <leader>cd :DroidConnect<CR><CR>
+nmap <leader>E cpp
+nmap <leader>e( ma[[cpp`a
+nnoremap <leader>ea :%Eval<CR>
+nnoremap <leader>R :%Eval<CR>:Eval (refresh)<CR>
 nnoremap <leader>rt :Require<CR>:RunTests<CR>
 
 " Paredit
