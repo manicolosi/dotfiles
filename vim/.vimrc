@@ -14,6 +14,8 @@ Plugin 'tpope/vim-repeat'
 
 " Tools
 Plugin 'kien/ctrlp.vim'
+let g:ctrlp_working_path_mode=0
+
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
