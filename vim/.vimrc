@@ -122,6 +122,8 @@ au FileType sml setl sw=4 ts=4
 au FileType lua setl sw=4 ts=4
 au FileType go setl sw=4 ts=4
 
+autocmd BufWritePre * :%s/\s\+$//e " Auto-strip trailing whitespace on write
+
 """ Maps and Commands
 
 let mapleader = ","
