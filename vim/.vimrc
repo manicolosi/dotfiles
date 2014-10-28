@@ -29,7 +29,9 @@ Plugin 'bling/vim-airline'
 Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-fireplace'
 Plugin 'amdt/vim-niji'
-Plugin 'vim-scripts/paredit.vim'
+"Plugin 'vim-scripts/paredit.vim'
+Plugin 'guns/vim-sexp'
+Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 
 let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let']
 
@@ -127,6 +129,7 @@ autocmd BufWritePre * :%s/\s\+$//e " Auto-strip trailing whitespace on write
 """ Maps and Commands
 
 let mapleader = ","
+let maplocalleader = ","
 
 " Turn off highlighted search
 nnoremap <Leader>c :nohlsearch<CR>
