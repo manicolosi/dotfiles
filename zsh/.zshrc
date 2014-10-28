@@ -181,8 +181,8 @@ export GOPATH="$HOME/.go"
 #PATH=$PATH:$HOME/.rvm/bin
 
 # Rbenv
-PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
 
 # Python
 PATH="$HOME/.local/bin:$PATH"
