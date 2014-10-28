@@ -27,7 +27,7 @@ Plugin 'bling/vim-airline'
 
 " Clojure
 Plugin 'guns/vim-clojure-static'
-Plugin 'manicolosi/vim-fireplace'
+Plugin 'tpope/vim-fireplace'
 Plugin 'amdt/vim-niji'
 Plugin 'vim-scripts/paredit.vim'
 
