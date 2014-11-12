@@ -139,9 +139,11 @@ nnoremap <leader>p :CtrlPBuffer<CR>
 
 " Fireplace
 command! DroidConnect Connect nrepl://localhost:9999
+command! SimpleBrepl Piggieback (weasel.repl.websocket/repl-env :ip "0.0.0.0" :port 9001)
 
 nnoremap <leader>C :Connect<CR>1<CR><CR>
 nnoremap <leader>cd :DroidConnect<CR><CR>
+nnoremap <leader>cb :SimpleBrepl<CR><CR>
 nmap <leader>E cpp
 nmap <leader>e( ma[[cpp`a
 nnoremap <leader>ea :%Eval<CR>
