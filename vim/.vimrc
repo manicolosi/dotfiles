@@ -132,6 +132,8 @@ autocmd VimResized * :wincmd =
 let mapleader = ","
 let maplocalleader = ","
 
+nnoremap Y y$
+
 " Turn off highlighted search
 nnoremap <Leader>c :nohlsearch<CR>
 
