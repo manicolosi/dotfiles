@@ -125,6 +125,7 @@ au FileType lua setl sw=4 ts=4
 au FileType go setl sw=4 ts=4
 
 autocmd BufWritePre * :%s/\s\+$//e " Auto-strip trailing whitespace on write
+autocmd VimResized * :wincmd =
 
 """ Maps and Commands
 
