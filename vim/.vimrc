@@ -134,9 +134,6 @@ let maplocalleader = ","
 
 nnoremap Y y$
 
-" Turn off highlighted search
-nnoremap <Leader>c :nohlsearch<CR>
-
 " CtrlP
 nnoremap <leader>p :CtrlPBuffer<CR>
 
@@ -151,14 +148,7 @@ nmap <Leader>e <Plug>FireplacePrint<Plug>(sexp_inner_element)
 nnoremap <leader>C :Connect<CR>1<CR><CR>
 nnoremap <leader>cd :DroidConnect<CR><CR>
 nnoremap <leader>cb :SimpleBrepl<CR><CR>
-nmap <leader>E cpp
-nmap <leader>e( ma[[cpp`a
 nnoremap <leader>ea :%Eval<CR>
-nnoremap <leader>R :%Eval<CR>:Eval (refresh)<CR>
-nnoremap <leader>rt :Require<CR>:RunTests<CR>
-
-" Paredit
-nnoremap <Leader>tp :call PareditToggle()<CR>
 
 " NERDTree
 nnoremap <leader>nt :NERDTreeToggle<CR>
