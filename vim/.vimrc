@@ -144,6 +144,10 @@ nnoremap <leader>p :CtrlPBuffer<CR>
 command! DroidConnect Connect nrepl://localhost:9999
 command! SimpleBrepl Piggieback (weasel.repl.websocket/repl-env :ip "0.0.0.0" :port 9001)
 
+nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)
+nmap <Leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)
+nmap <Leader>e <Plug>FireplacePrint<Plug>(sexp_inner_element)
+
 nnoremap <leader>C :Connect<CR>1<CR><CR>
 nnoremap <leader>cd :DroidConnect<CR><CR>
 nnoremap <leader>cb :SimpleBrepl<CR><CR>
