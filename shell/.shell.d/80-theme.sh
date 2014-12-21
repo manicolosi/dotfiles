@@ -1,5 +1,5 @@
 #!/bin/sh
-# Base16 Default - Console color setup script
+# Base16 Default Dark - Console color setup script
 # Chris Kempson (http://chriskempson.com)
 
 color00="15/15/15" # Base 00 - Black
