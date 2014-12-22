@@ -17,6 +17,7 @@ Plugin 'kien/ctrlp.vim'
 let g:ctrlp_working_path_mode=0
 
 Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
