@@ -34,7 +34,7 @@ Plugin 'amdt/vim-niji'
 Plugin 'guns/vim-sexp'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 
-let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let']
+let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop']
 
 " Other languages
 Plugin 'vim-ruby/vim-ruby'
