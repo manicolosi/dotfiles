@@ -17,6 +17,6 @@
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr by %an)%Creset' --abbrev-commit --date=relative
 	br = branch
 [push]
-	default = simple
+	default = tracking
 [pull]
 	rebase = true
