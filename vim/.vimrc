@@ -153,7 +153,7 @@ nmap <leader>cd :DroidConnect<CR><CR>
 nmap <leader>cb :SimpleBrepl<CR><CR>
 
 "" Evaluation
-nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)
-nmap <Leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)
-nmap <Leader>e <Plug>FireplacePrint<Plug>(sexp_inner_element)
-nmap <Leader>B :%Eval<CR>
+nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
+nmap <Leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
+nmap <Leader>e <Plug>FireplacePrint<Plug>(sexp_inner_element)``
+nmap <Leader>E :%Eval<CR>
