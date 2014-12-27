@@ -128,6 +128,7 @@ au FileType go setl sw=4 ts=4
 autocmd BufWritePre * :%s/\s\+$//e " Auto-strip trailing whitespace on write
 autocmd VimResized * :wincmd =
 autocmd BufRead,BufNewFile *.cljx setfiletype clojure
+autocmd FileType text setl formatoptions+=t
 
 """ Maps and Commands
 
