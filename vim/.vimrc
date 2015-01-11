@@ -130,6 +130,9 @@ autocmd VimResized * :wincmd =
 autocmd BufRead,BufNewFile *.cljx setfiletype clojure
 autocmd FileType text setl formatoptions+=t
 
+source $VIMRUNTIME/ftplugin/man.vim
+autocmd FileType man setlocal nolist readonly nomodifiable
+
 """ Maps and Commands
 
 let mapleader = ","
