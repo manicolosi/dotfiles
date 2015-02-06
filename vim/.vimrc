@@ -21,6 +21,11 @@ Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'scrooloose/syntastic'
+
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_always_populate_loc_list = 1
 
 " Look
 Plugin 'chriskempson/base16-vim'
@@ -29,11 +34,14 @@ Plugin 'bling/vim-airline'
 " Clojure
 Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-fireplace'
+"Plugin 'venantius/vim-cljfmt'
+Plugin 'venantius/vim-eastwood'
 Plugin 'amdt/vim-niji'
 "Plugin 'vim-scripts/paredit.vim'
 Plugin 'guns/vim-sexp'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 
+let g:clj_fmt_autosave = 0
 let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop']
 
 " Other languages
