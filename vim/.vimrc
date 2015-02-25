@@ -11,6 +11,8 @@ Plugin 'gmarik/Vundle.vim'
 " Text editing enhancements
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+Plugin 'junegunn/vim-pseudocl'
+Plugin 'junegunn/vim-oblique'
 
 " Tools
 Plugin 'kien/ctrlp.vim'
