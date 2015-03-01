@@ -54,6 +54,19 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'ledger/vim-ledger'
 Plugin 'tpope/vim-markdown'
 
+let g:markdown_fenced_languages = [
+      \ 'coffee',
+      \ 'css',
+      \ 'erb=eruby',
+      \ 'javascript',
+      \ 'js=javascript',
+      \ 'json=javascript',
+      \ 'ruby',
+      \ 'sass',
+      \ 'xml',
+      \ 'html',
+      \ 'clojure']
+
 " Tmux
 "Plugin 'jpalardy/vim-slime'
 "Plugin 'tpope/vim-dispatch'
