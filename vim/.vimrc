@@ -29,22 +29,23 @@ let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_always_populate_loc_list = 1
 
-" Look
+" Look and feel
 Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
+"Plugin 'sjl/vitality.vim'
 
 " Clojure
 Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-fireplace'
 "Plugin 'venantius/vim-cljfmt'
-Plugin 'venantius/vim-eastwood'
+"Plugin 'venantius/vim-eastwood'
 Plugin 'amdt/vim-niji'
 "Plugin 'vim-scripts/paredit.vim'
 Plugin 'guns/vim-sexp'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 
 let g:clj_fmt_autosave = 0
-let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop']
+let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop', 'match']
 
 " Other languages
 Plugin 'vim-ruby/vim-ruby'
@@ -148,6 +149,7 @@ au FileType java setl sw=4 ts=4
 au FileType sml setl sw=4 ts=4
 au FileType lua setl sw=4 ts=4
 au FileType go setl sw=4 ts=4
+au FileType coffee setl sw=4 ts=4
 
 autocmd BufWritePre * :%s/\s\+$//e " Auto-strip trailing whitespace on write
 autocmd VimResized * :wincmd =
@@ -164,9 +166,10 @@ let maplocalleader = ","
 
 " General
 nnoremap Y y$
+nnoremap <leader>p ya(%a<CR><esc>p
 
 " CtrlP
-nmap <leader>p :CtrlPBuffer<CR>
+"nmap <leader>p :CtrlPBuffer<CR>
 
 " NERDTree
 nmap <leader>nt :NERDTreeToggle<CR>
