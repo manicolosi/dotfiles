@@ -73,6 +73,7 @@ let g:markdown_fenced_languages = [
 "Plugin 'jgdavey/tslime.vim'
 Plugin 'wellle/tmux-complete.vim'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 call vundle#end()
 
