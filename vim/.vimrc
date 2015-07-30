@@ -71,7 +71,7 @@ let g:markdown_fenced_languages = [
       \ 'sass',
       \ 'xml',
       \ 'html',
-      \ 'clojure']
+      \ 'clojure' ]
 
 " Tmux
 "Plugin 'jpalardy/vim-slime'
@@ -173,7 +173,6 @@ let maplocalleader = ","
 " General
 nnoremap Y y$
 nnoremap <leader>p ya(%a<CR><esc>p
-"nnoremap <leader>p (y%%a<CR><esc>p
 
 " CtrlP
 nmap <C-S-P> :CtrlPBuffer<CR>
