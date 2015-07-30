@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cd ~/builds/ksp/KSP_linux && ./start_ksp.sh & exit
