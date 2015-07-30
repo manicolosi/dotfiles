@@ -23,7 +23,11 @@ Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-rsi'
 Plugin 'scrooloose/syntastic'
+Plugin 'aquach/vim-http-client'
+Plugin 'vasconcelloslf/vim-interestingwords'
 
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
@@ -32,6 +36,7 @@ let g:syntastic_always_populate_loc_list = 1
 " Look and feel
 Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
+Plugin 'ntpeters/vim-airline-colornum'
 "Plugin 'sjl/vitality.vim'
 
 " Clojure
@@ -39,13 +44,13 @@ Plugin 'guns/vim-clojure-static'
 Plugin 'tpope/vim-fireplace'
 "Plugin 'venantius/vim-cljfmt'
 "Plugin 'venantius/vim-eastwood'
-Plugin 'amdt/vim-niji'
+Plugin 'losingkeys/vim-niji'
 "Plugin 'vim-scripts/paredit.vim'
 Plugin 'guns/vim-sexp'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 
 let g:clj_fmt_autosave = 0
-let g:clojure_fuzzy_indent_patterns = ['describe', 'it', '^doto', '^with', '^def', '^let', 'go-loop', 'match']
+let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'match']
 
 " Other languages
 Plugin 'vim-ruby/vim-ruby'
@@ -75,6 +80,7 @@ let g:markdown_fenced_languages = [
 Plugin 'wellle/tmux-complete.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
+au FocusLost * silent redraw!
 
 call vundle#end()
 
@@ -167,9 +173,10 @@ let maplocalleader = ","
 " General
 nnoremap Y y$
 nnoremap <leader>p ya(%a<CR><esc>p
+"nnoremap <leader>p (y%%a<CR><esc>p
 
 " CtrlP
-"nmap <leader>p :CtrlPBuffer<CR>
+nmap <C-S-P> :CtrlPBuffer<CR>
 
 " NERDTree
 nmap <leader>nt :NERDTreeToggle<CR>
@@ -179,7 +186,7 @@ nmap <leader>nt :NERDTreeToggle<CR>
 "" Connecting
 command! DroidConnect Connect nrepl://localhost:9999
 command! SimpleBrepl Piggieback (weasel.repl.websocket/repl-env :ip "0.0.0.0" :port 9001)
-nmap <leader>C :Connect<CR>1<CR><CR>
+nmap <leader>C :Connect<CR>1<CR>
 nmap <leader>cd :DroidConnect<CR><CR>
 nmap <leader>cb :SimpleBrepl<CR><CR>
 
