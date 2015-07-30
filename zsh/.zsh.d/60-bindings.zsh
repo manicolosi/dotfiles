@@ -26,3 +26,21 @@ bindkey '^xf' complete-files
 autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
+
+cdParentKey() {
+  pushd .. > /dev/null
+  zle reset-prompt
+}
+
+zle -N cdParentKey
+bindkey "^n" cdParentKey
+
+cdBackKey() {
+  popd > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    zle reset-prompt
+  fi
+}
+
+zle -N cdBackKey
+bindkey "^p" cdBackKey
