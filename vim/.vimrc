@@ -41,7 +41,7 @@ Plugin 'ntpeters/vim-airline-colornum'
 
 " Clojure
 Plugin 'guns/vim-clojure-static'
-Plugin 'tpope/vim-fireplace'
+Plugin 'christoph-frick/vim-fireplace'
 "Plugin 'venantius/vim-cljfmt'
 "Plugin 'venantius/vim-eastwood'
 Plugin 'losingkeys/vim-niji'
@@ -183,11 +183,14 @@ nmap <leader>nt :NERDTreeToggle<CR>
 " Fireplace
 
 "" Connecting
-command! DroidConnect Connect nrepl://localhost:9999
-command! SimpleBrepl Piggieback (weasel.repl.websocket/repl-env :ip "0.0.0.0" :port 9001)
+command! DroidConnect :Connect nrepl://localhost:9999
+command! SimpleBrepl :Piggieback (weasel.repl.websocket/repl-env :ip "0.0.0.0" :port 9001)
+command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
+
 nmap <leader>C :Connect<CR>1<CR>
 nmap <leader>cd :DroidConnect<CR><CR>
 nmap <leader>cb :SimpleBrepl<CR><CR>
+nmap <leader>cf :Figwheel<CR><CR>
 
 "" Evaluation
 nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
