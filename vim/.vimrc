@@ -173,6 +173,7 @@ let maplocalleader = ","
 " General
 nnoremap Y y$
 nnoremap <leader>p ya(%a<CR><esc>p
+nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>
 
 " CtrlP
 nmap <C-S-P> :CtrlPBuffer<CR>
