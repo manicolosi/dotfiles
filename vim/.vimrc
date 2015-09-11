@@ -187,12 +187,11 @@ nmap <leader>nt :NERDTreeToggle<CR>
 
 "" Connecting
 command! DroidConnect :Connect nrepl://localhost:9999
-command! SimpleBrepl :Piggieback (weasel.repl.websocket/repl-env :ip "0.0.0.0" :port 9001)
 command! Figwheel :Piggieback! (do (require 'figwheel-sidecar.repl-api) (figwheel-sidecar.repl-api/cljs-repl))
 
 nmap <leader>C :Connect<CR>1<CR>
 nmap <leader>cd :DroidConnect<CR><CR>
-nmap <leader>cb :SimpleBrepl<CR><CR>
+nmap <leader>cb :Piggieback (adzerk.boot-cljs-repl/repl-env)<CR><CR>
 nmap <leader>cf :Figwheel<CR><CR>
 
 "" Evaluation
