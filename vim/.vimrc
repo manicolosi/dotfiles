@@ -28,6 +28,7 @@ Plugin 'tpope/vim-rsi'
 Plugin 'scrooloose/syntastic'
 Plugin 'aquach/vim-http-client'
 Plugin 'vasconcelloslf/vim-interestingwords'
+"Plugin 'KabbAmine/zeavim.vim'
 
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
@@ -155,11 +156,12 @@ au FileType java setl sw=4 ts=4
 au FileType sml setl sw=4 ts=4
 au FileType lua setl sw=4 ts=4
 au FileType go setl sw=4 ts=4
-au FileType coffee setl sw=4 ts=4
+au FileType coffee setl sw=2 ts=2
 
 "autocmd BufWritePre * :%s/\s\+$//e " Auto-strip trailing whitespace on write
 autocmd VimResized * :wincmd =
 autocmd BufRead,BufNewFile *.cljx setfiletype clojure
+autocmd BufRead,BufNewFile build.boot setfiletype clojure
 autocmd FileType text setl formatoptions+=t
 
 source $VIMRUNTIME/ftplugin/man.vim
