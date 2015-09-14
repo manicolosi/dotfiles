@@ -37,7 +37,7 @@ let g:syntastic_always_populate_loc_list = 1
 " Look and feel
 Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
-Plugin 'ntpeters/vim-airline-colornum'
+Plugin 'manicolosi/vim-airline-colornum'
 "Plugin 'sjl/vitality.vim'
 
 " Clojure
