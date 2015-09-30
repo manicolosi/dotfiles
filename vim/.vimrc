@@ -126,8 +126,12 @@ set hidden      " Don't require saving before switching buffers
 set showcmd     " Show command prefixes.
 set wildmenu    " Menu of completions
 set scrolloff=5 " Keep 5 lines of context when scrolling
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+set nobackup
+set noswapfile
+
+set undofile
+set undodir=~/.vim/undo
 
 " Files ignored when expanding wildcards. Also ignored by CtrlP.
 set wildignore+=*.class
