@@ -80,7 +80,13 @@ let g:markdown_fenced_languages = [
 "Plugin 'jgdavey/tslime.vim'
 Plugin 'wellle/tmux-complete.vim'
 Plugin 'christoomey/vim-tmux-navigator'
+
+if has('nvim')
+  nmap <bs> :<c-u>TmuxNavigateLeft<cr>
+endif
+
 Plugin 'tmux-plugins/vim-tmux-focus-events'
+
 au FocusLost * silent redraw!
 
 call vundle#end()
