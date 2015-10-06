@@ -51,7 +51,7 @@ Plugin 'guns/vim-sexp'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 
 let g:clj_fmt_autosave = 0
-let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'match']
+let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'match', '^GET', '^PUT', '^POST', '^DELETE', '^ANY']
 
 " Other languages
 Plugin 'vim-ruby/vim-ruby'
