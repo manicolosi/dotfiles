@@ -25,6 +25,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-rsi'
+
 Plugin 'scrooloose/syntastic'
 Plugin 'aquach/vim-http-client'
 Plugin 'vasconcelloslf/vim-interestingwords'
@@ -186,6 +187,8 @@ let maplocalleader = ","
 nnoremap Y y$
 nnoremap <leader>p ya(%a<CR><esc>p
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>
+nmap <leader>tk ds"i:<ESC>
+"nmap <leader>ts "adiwPbxcsw"
 
 " CtrlP
 nmap <C-S-P> :CtrlPBuffer<CR>
