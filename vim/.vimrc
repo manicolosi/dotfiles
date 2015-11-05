@@ -94,10 +94,11 @@ call vundle#end()
 
 """ Look and Feel
 
+syntax enable
+
 set background=dark
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-default
-hi Normal ctermbg=none
 
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -115,12 +116,11 @@ if has("gui_running")
   let &colorcolumn="81,".join(range(121,999),",")
 endif
 
-" Turn on syntax hilighting.
-syntax enable
+hi normal ctermbg=none
+
 filetype plugin indent on
 
 set mouse=a
-
 set autoread
 set laststatus=2
 set cursorline
