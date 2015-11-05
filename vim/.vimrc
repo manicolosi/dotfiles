@@ -94,8 +94,6 @@ call vundle#end()
 
 """ Look and Feel
 
-syntax enable
-
 set background=dark
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-default
@@ -116,9 +114,13 @@ if has("gui_running")
   let &colorcolumn="81,".join(range(121,999),",")
 endif
 
+syntax enable
+filetype plugin indent on
+
+" Breaks color them for CtrlP in airline...?
 hi normal ctermbg=none
 
-filetype plugin indent on
+""" Options
 
 set mouse=a
 set autoread
