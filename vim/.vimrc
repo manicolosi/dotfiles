@@ -119,6 +119,8 @@ endif
 syntax enable
 filetype plugin indent on
 
+set mouse=a
+
 set autoread
 set laststatus=2
 set cursorline
