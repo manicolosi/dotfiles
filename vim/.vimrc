@@ -117,7 +117,7 @@ endif
 syntax enable
 filetype plugin indent on
 
-" Breaks color them for CtrlP in airline...?
+" Breaks color theme for CtrlP in airline...?
 hi normal ctermbg=none
 
 """ Options
