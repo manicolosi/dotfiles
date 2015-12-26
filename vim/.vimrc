@@ -18,6 +18,9 @@ Plugin 'junegunn/vim-oblique'
 Plugin 'kien/ctrlp.vim'
 let g:ctrlp_working_path_mode=0
 
+Plugin 'naquad/ctrlp-digraphs.vim'
+let g:ctrlp_extensions = ['tag', 'dir', 'undo', 'line', 'changes', 'digraphs']
+
 Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
@@ -43,7 +46,7 @@ Plugin 'manicolosi/vim-airline-colornum'
 
 " Clojure
 Plugin 'guns/vim-clojure-static'
-Plugin 'christoph-frick/vim-fireplace'
+Plugin 'tpope/vim-fireplace'
 "Plugin 'venantius/vim-cljfmt'
 "Plugin 'venantius/vim-eastwood'
 Plugin 'losingkeys/vim-niji'
@@ -53,6 +56,7 @@ Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 
 let g:clj_fmt_autosave = 0
 let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'match', '^context', '^GET', '^PUT', '^POST', '^PATCH', '^DELETE', '^ANY']
+let g:clojure_align_multiline_strings = 1
 
 " Other languages
 Plugin 'vim-ruby/vim-ruby'
@@ -61,6 +65,11 @@ Plugin 'tikhomirov/vim-glsl'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'ledger/vim-ledger'
 Plugin 'tpope/vim-markdown'
+
+if has('nvim')
+  Plugin 'neovim/node-host'
+  "Plugin 'snoe/nvim-parinfer.js'
+endif
 
 let g:markdown_fenced_languages = [
       \ 'coffee',
