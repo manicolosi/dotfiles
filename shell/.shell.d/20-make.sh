@@ -17,14 +17,13 @@ function _find_up() {
 }
 
 function _make() {
-  args=$@
   makefile=$(_find_up Makefile)
 
   if [ -z "$makefile" ]; then
     return 1
   fi
 
-  make -f $makefile $args
+  make -f $makefile "$@"
 }
 
 alias m="_make"
