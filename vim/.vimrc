@@ -208,6 +208,8 @@ nnoremap <leader>p ya(%a<CR><esc>p
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>
 nmap <leader>tk ds"i:<ESC>
 "nmap <leader>ts "adiwPbxcsw"
+nmap <leader>pe :%s/, /\r/g<CR>:%s/} {/}\r{/g<CR>gg=G
+nmap <leader>s mzgg/:require<CR>)i<CR><ESC>(jV)b:sort<CR>))bJ`z
 
 " CtrlP
 nmap <C-S-P> :CtrlPBuffer<CR>
