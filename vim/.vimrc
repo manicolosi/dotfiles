@@ -29,14 +29,19 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-rsi'
 
-Plugin 'scrooloose/syntastic'
 Plugin 'aquach/vim-http-client'
 Plugin 'vasconcelloslf/vim-interestingwords'
 "Plugin 'KabbAmine/zeavim.vim'
 
+Plugin 'scrooloose/syntastic'
+
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_always_populate_loc_list = 1
+
+Plugin 'manicolosi/taboo.vim'
+
+let g:taboo_tab_format = "[%P%m] "
 
 " Look and feel
 Plugin 'chriskempson/base16-vim'
