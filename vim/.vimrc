@@ -41,7 +41,7 @@ let g:syntastic_always_populate_loc_list = 1
 
 Plugin 'manicolosi/taboo.vim'
 
-let g:taboo_tab_format = "[%P%m] "
+let g:taboo_tab_format = " %N. %P%m "
 
 " Look and feel
 Plugin 'chriskempson/base16-vim'
@@ -209,7 +209,7 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>
 nmap <leader>tk ds"i:<ESC>
 "nmap <leader>ts "adiwPbxcsw"
 nmap <leader>pe :%s/, /\r/g<CR>:%s/} {/}\r{/g<CR>gg=G
-nmap <leader>s mzgg/:require<CR>)i<CR><ESC>(jV)b:sort<CR>))bJ`z
+nmap <leader>s mzgg/:require$<CR>)i<CR><ESC>(jV)b:sort<CR>))bJ`z
 
 " CtrlP
 nmap <C-S-P> :CtrlPBuffer<CR>
@@ -233,3 +233,20 @@ nmap <Leader>F <Plug>FireplacePrint<Plug>(sexp_outer_top_list)``
 nmap <Leader>f <Plug>FireplacePrint<Plug>(sexp_outer_list)``
 nmap <Leader>e <Plug>FireplacePrint<Plug>(sexp_inner_element)``
 nmap <Leader>E :%Eval<CR>
+
+" Tab swtiching
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<CR>
+
+au TabLeave * let g:lasttab = tabpagenr()
+" Go to last active tab
+nnoremap <silent> <leader>` :exe "tabn ".g:lasttab<CR>
+vnoremap <silent> <leader>` :exe "tabn ".g:lasttab<CR>
