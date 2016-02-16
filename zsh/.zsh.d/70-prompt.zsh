@@ -30,7 +30,10 @@ function zsh_git_prompt_precmd {
 
   vcs_info
 }
-precmd_functions+='zsh_git_prompt_precmd'
+
+autoload -U add-zsh-hook
+
+add-zsh-hook precmd zsh_git_prompt_precmd
 
 function prompt_user_at_host {
   if [ -n "${SSH_CONNECTION}" ]; then
