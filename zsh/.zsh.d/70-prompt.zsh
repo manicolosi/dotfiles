@@ -45,7 +45,7 @@ function prompt_user_at_host {
 function git_initials {
   initials=$(git config --get user.initials)
   if [[ -n "${initials}" ]]; then
-    echo "%{%F{green}%}${initials}%{$reset_color%} "
+    echo "%{%F{red}%}${initials}%{$reset_color%} "
   fi
 }
 

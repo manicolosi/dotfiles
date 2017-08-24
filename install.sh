@@ -31,7 +31,7 @@ main() {
   if [ -n "$ARGS" ]; then
     packages="$ARGS"
   else
-    packages=$(ls -d */ | xargs realpath --relative-to=$PWD)
+    packages=$(ls -d */ | xargs grealpath --relative-to=$PWD)
   fi
 
   for package in $packages; do
