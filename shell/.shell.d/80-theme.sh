@@ -4,13 +4,12 @@ function setup() {
 }
 
 function change_theme() {
-  local root_dir="$HOME/code/base16-shell"
+  local root_dir="$HOME/code/base16-shell/scripts"
   local theme=$1
-  local mood=$2
 
-  echo "${root_dir}/base16-${theme}.${mood}.sh" > ~/.shell-theme
+  echo "${root_dir}/base16-${theme}.sh" > ~/.shell-theme
 
-  echo "set background=${mood}" > ~/.vim_theme
+  echo "set background=dark" > ~/.vim_theme
   echo "colorscheme base16-${theme}" >> ~/.vim_theme
 
   setup
