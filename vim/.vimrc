@@ -1,42 +1,32 @@
 set nocompatible
 filetype off
 
-""" Plugins
+call plug#begin('~/.vim/plugged')
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'gmarik/Vundle.vim'
+Plug 'gmarik/Vundle.vim'
 
 " Text editing enhancements
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'junegunn/vim-pseudocl'
-Plugin 'junegunn/vim-oblique'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'junegunn/vim-pseudocl'
+Plug 'junegunn/vim-oblique'
 
 " Tools
-Plugin 'kien/ctrlp.vim'
-let g:ctrlp_working_path_mode=0
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
 
-Plugin 'naquad/ctrlp-digraphs.vim'
-let g:ctrlp_extensions = ['tag', 'dir', 'undo', 'line', 'changes', 'digraphs']
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-rsi'
 
-Plugin 'mileszs/ack.vim'
-Plugin 'rking/ag.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-rsi'
+Plug 'aquach/vim-http-client'
 
-Plugin 'aquach/vim-http-client'
-Plugin 'vasconcelloslf/vim-interestingwords'
-"Plugin 'KabbAmine/zeavim.vim'
-
-Plugin 'scrooloose/syntastic'
-Plugin 'aclaimant/syntastic-joker'
+Plug 'scrooloose/syntastic'
+Plug 'aclaimant/syntastic-joker'
 
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
@@ -44,45 +34,34 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_clojure_checkers = ['joker']
 
-Plugin 'manicolosi/taboo.vim'
+Plug 'manicolosi/taboo.vim'
 
 let g:taboo_tab_format = " %N. %P%m "
 
-Plugin 'Shougo/unite.vim'
-
 " Look and feel
-Plugin 'chriskempson/base16-vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'manicolosi/vim-airline-colornum'
-"Plugin 'sjl/vitality.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'manicolosi/vim-airline-colornum'
 
 " Clojure
-Plugin 'guns/vim-clojure-static'
-Plugin 'tpope/vim-fireplace'
-"Plugin 'venantius/vim-cljfmt'
-"Plugin 'venantius/vim-eastwood'
-Plugin 'losingkeys/vim-niji'
-"Plugin 'vim-scripts/paredit.vim'
-Plugin 'guns/vim-sexp'
-Plugin 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'guns/vim-clojure-static'
+Plug 'tpope/vim-fireplace'
+Plug 'losingkeys/vim-niji'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 let g:clj_fmt_autosave = 0
 let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'match', '^context', '^GET', '^PUT', '^POST', '^PATCH', '^DELETE', '^ANY', 'this-as', '^are']
 let g:clojure_align_multiline_strings = 1
 
 " Other languages
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'fsouza/go.vim'
-Plugin 'tikhomirov/vim-glsl'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'ledger/vim-ledger'
-Plugin 'tpope/vim-markdown'
-
-if has('nvim')
-  Plugin 'neovim/node-host'
-  "Plugin 'snoe/nvim-parinfer.js'
-endif
+Plug 'vim-ruby/vim-ruby'
+Plug 'fsouza/go.vim'
+Plug 'tikhomirov/vim-glsl'
+Plug 'kchmck/vim-coffee-script'
+Plug 'ledger/vim-ledger'
+Plug 'tpope/vim-markdown'
 
 let g:markdown_fenced_languages = [
       \ 'coffee',
@@ -98,21 +77,12 @@ let g:markdown_fenced_languages = [
       \ 'clojure' ]
 
 " Tmux
-"Plugin 'jpalardy/vim-slime'
-"Plugin 'tpope/vim-dispatch'
-"Plugin 'jgdavey/tslime.vim'
-Plugin 'wellle/tmux-complete.vim'
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
-if has('nvim')
-  nmap <bs> :<c-u>TmuxNavigateLeft<cr>
-endif
-
-Plugin 'tmux-plugins/vim-tmux-focus-events'
+call plug#end()
 
 au FocusLost * silent redraw!
-
-call vundle#end()
 
 """ Look and Feel
 
@@ -194,6 +164,8 @@ set tabstop=2
 
 set iskeyword+='
 
+set spell spelllang=en_us
+
 au FileType java setl sw=4 ts=4
 au FileType sml setl sw=4 ts=4
 au FileType lua setl sw=4 ts=4
@@ -214,14 +186,20 @@ autocmd FileType man setlocal nolist readonly nomodifiable
 let mapleader = ","
 let maplocalleader = ","
 
-" General
 nnoremap Y y$
+
+" Copy sexp to next line
 nnoremap <leader>p ya(%a<CR><esc>p
+
+" Split line at cursor
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>
-nmap <leader>tk ds"i:<ESC>
-"nmap <leader>ts "adiwPbxcsw"
+
+" Make pprint even prettier
 nmap <leader>pe :%s/, /\r/g<CR>:%s/} {/}\r{/g<CR>gg=G
-"nmap <leader>s mzgg/:require$<CR>)i<CR><ESC>(jV)b:sort<CR>))bJ`z
+
+" Keyword <-> string
+"nmap <leader>tk ds"i:<ESC>
+"nmap <leader>ts "adiwPbxcsw"
 
 " Sort namespaces in (:require)
 function! CljSortRequireFn(find)
@@ -245,9 +223,6 @@ endfunction
 command! -nargs=1 CljSortRequire call CljSortRequireFn(<q-args>)
 nmap <silent> <leader>s :CljSortRequire :require<CR>
 nmap <silent> <leader>m :CljSortRequire :require-macros<CR>
-
-" CtrlP
-nmap <C-S-P> :CtrlPBuffer<CR>
 
 " NERDTree
 nmap <leader>nt :NERDTreeToggle<CR>
@@ -294,4 +269,23 @@ au TabLeave * let g:lasttab = tabpagenr()
 nnoremap <silent> <leader>` :exe "tabn ".g:lasttab<CR>
 vnoremap <silent> <leader>` :exe "tabn ".g:lasttab<CR>
 
-set spell spelllang=en_us
+" Ag
+"
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+nnoremap <Leader>a :Ack!<Space>
+
+" FZF
+nmap ; :Buffers<CR>
+nmap <Leader>t :Files<CR>
+nmap <Leader>r :Tags<CR>
+
+nmap <silent> <C-n><C-p> :GFiles<CR>
+nmap <silent> <C-n><C-t> :Tags<CR>
+nmap <silent> <C-n><C-b> :BTags<CR>
+nmap <silent> <C-n><C-k> :Lines<CR>
+nmap <silent> <C-n><C-l> :BLines<CR>
+
+nmap <leader>k    :Ack! "\b<cword>\b" <CR>
