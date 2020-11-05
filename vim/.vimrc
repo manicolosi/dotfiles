@@ -10,8 +10,19 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
+Plug 'terryma/vim-multiple-cursors'
+
+let g:multi_cursor_exit_from_insert_mode=0
 
 " Tools
+
+"Plug 'autozimu/LanguageClient-neovim', {
+"    \ 'branch': 'next',
+"    \ 'do': 'bash install.sh',
+"    \ }
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+
+
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 
@@ -52,7 +63,7 @@ Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 let g:clj_fmt_autosave = 0
-let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'match', '^context', '^GET', '^PUT', '^POST', '^PATCH', '^DELETE', '^ANY', 'this-as', '^are']
+let g:clojure_fuzzy_indent_patterns = ['^doto', '^with', '^def', '^let', 'go-loop', 'match', '^context', '^GET', '^PUT', '^POST', '^PATCH', '^DELETE', '^ANY', 'this-as', '^are', '^reg-', 'fdef', '^dofor']
 let g:clojure_align_multiline_strings = 1
 
 " Other languages
@@ -61,7 +72,8 @@ Plug 'fsouza/go.vim'
 Plug 'tikhomirov/vim-glsl'
 Plug 'kchmck/vim-coffee-script'
 Plug 'ledger/vim-ledger'
-Plug 'tpope/vim-markdown'
+"Plug 'tpope/vim-markdown'
+Plug 'plasticboy/vim-markdown'
 
 let g:markdown_fenced_languages = [
       \ 'coffee',
@@ -80,6 +92,8 @@ let g:markdown_fenced_languages = [
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
+let g:tmux_navigator_disable_when_zoomed = 1
+
 call plug#end()
 
 au FocusLost * silent redraw!
@@ -90,6 +104,8 @@ if filereadable(expand("~/.vim_theme"))
   let base16colorspace=256
   source ~/.vim_theme
 endif
+
+highlight Pmenu ctermbg=236
 
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -111,7 +127,7 @@ syntax enable
 filetype plugin indent on
 
 " Breaks color theme for CtrlP in airline...?
-hi normal ctermbg=none
+"hi normal ctermbg=none
 
 """ Options
 
@@ -127,13 +143,16 @@ set incsearch
 set ignorecase
 set smartcase
 
+set completeopt=longest,menuone
+
 set hidden      " Don't require saving before switching buffers
 set showcmd     " Show command prefixes.
 set wildmenu    " Menu of completions
 set scrolloff=5 " Keep 5 lines of context when scrolling
 
-set nobackup
-set noswapfile
+"set nobackup
+"set noswapfile
+set directory=$HOME/tmp
 
 set undofile
 set undodir=~/.vim/undo
@@ -162,15 +181,16 @@ set textwidth=80
 set shiftwidth=2
 set tabstop=2
 
-set iskeyword+='
+set signcolumn=yes
 
-set spell spelllang=en_us
+"set spell spelllang=en_us
 
 au FileType java setl sw=4 ts=4
 au FileType sml setl sw=4 ts=4
 au FileType lua setl sw=4 ts=4
 au FileType go setl sw=4 ts=4
 au FileType coffee setl sw=2 ts=2
+au FileType scss setl iskeyword+=-
 
 "autocmd BufWritePre * :%s/\s\+$//e " Auto-strip trailing whitespace on write
 autocmd VimResized * :wincmd =
@@ -180,6 +200,8 @@ autocmd BufRead,BufNewFile .joker setfiletype clojure
 autocmd FileType text setl formatoptions+=t
 
 autocmd FileType man setlocal nolist readonly nomodifiable
+
+autocmd CursorHold * silent call CocAction('highlight')
 
 """ Maps and Commands
 
@@ -272,20 +294,81 @@ vnoremap <silent> <leader>` :exe "tabn ".g:lasttab<CR>
 " Ag
 "
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+  let g:ackprg = 'ag --vimgrep --path-to-ignore=./.ignore'
 endif
 
-nnoremap <Leader>a :Ack!<Space>
 
 " FZF
-nmap ; :Buffers<CR>
-nmap <Leader>t :Files<CR>
-nmap <Leader>r :Tags<CR>
+nmap <silent> <C-n><C-p> :GFiles --exclude-standard --cached --others<CR>
+nmap <silent> <C-n><C-b> :Buffers<CR>
+nmap <silent> <C-n><C-f> :Files<CR>
 
-nmap <silent> <C-n><C-p> :GFiles<CR>
-nmap <silent> <C-n><C-t> :Tags<CR>
-nmap <silent> <C-n><C-b> :BTags<CR>
-nmap <silent> <C-n><C-k> :Lines<CR>
-nmap <silent> <C-n><C-l> :BLines<CR>
+nnoremap <leader>a :Ack!<Space>
+nmap <leader>k :Ack! "\b<cword>\b" <CR>
 
-nmap <leader>k    :Ack! "\b<cword>\b" <CR>
+" COC
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <leader>u <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+command! -nargs=0 Format :call CocAction('format')
+
+inoremap <silent><expr> <c-space> coc#refresh()
+nmap <silent> [l <Plug>(coc-diagnostic-prev)
+nmap <silent> ]l <Plug>(coc-diagnostic-next)
+nmap <silent> [w :CocPrev<cr>
+nmap <silent> ]w :CocNext<cr>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+function! Expand(exp) abort
+    let l:result = expand(a:exp)
+    return l:result ==# '' ? '' : "file://" . l:result
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+vmap <leader>crf <Plug>(coc-format-selected)
+nmap <leader>crf <Plug>(coc-format-selected)
+
+nnoremap <silent> crcc :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-coll', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crcp :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-privacy', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crth :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crtt :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crtf :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crtl :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> cruw :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-thread', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crua :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crml :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'move-to-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
+nnoremap <silent> cril :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'introduce-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
+nnoremap <silent> crel :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'expand-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> cram :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'add-missing-libspec', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> crcn :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'clean-ns', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
+nnoremap <silent> cref :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'extract-function', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Function name: ')]})<CR>
+"inoremap <silent><expr> <c-m> coc#refresh()
+
+nnoremap <silent><space>s  :<C-u>CocList -I symbols<cr>
+
+vmap <leader>= <Plug>(coc-format-selected)
+nmap <leader>= <Plug>(coc-format-selected)
+
+function! SynGroup()
+  let l:s = synID(line('.'), col('.'), 1)
+  echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
+
+hi clear SpellBad
+hi SpellBad cterm=underline,bold
+
+hi clear CocHighlightText
+hi CocHighlightText ctermbg=white ctermfg=black

@@ -1,10 +1,7 @@
 #!/bin/sh
 
-VUNDLE_REPO="https://github.com/gmarik/Vundle.vim.git"
-VUNDLE_DIR="$HOME/.vim/bundle/Vundle.vim"
+mkdir -p ~/.vim/autoload
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-if [ ! -d "$VUNDLE_DIR" ]; then
-  git clone "$VUNDLE_REPO" "$VUNDLE_DIR"
-fi
-
-vim +PluginInstall +qall
+vim +PlugInstall +qall
