@@ -9,11 +9,11 @@ function my_term_title_preexec {
 
 function my_term_title_precmd {
   case $TERM in
+    screen*|xterm-kitty)
+      title "$(truncated_pwd 1)"
+      ;;
     xterm*|rxvt*)
       title "%n@%m:$(truncated_pwd 3)"
-      ;;
-    screen*)
-      title "$(truncated_pwd 1)"
       ;;
   esac
 }
@@ -21,4 +21,4 @@ function my_term_title_precmd {
 autoload -U add-zsh-hook
 
 add-zsh-hook precmd my_term_title_precmd
-add-zsh-hook preexec my_term_title_preexec
+#add-zsh-hook preexec my_term_title_preexec

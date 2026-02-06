@@ -44,3 +44,16 @@ cdBackKey() {
 
 zle -N cdBackKey
 bindkey "^p" cdBackKey
+
+# Ctrl-w - delete a full WORD (including colon, dot, comma, quotes...)
+# https://unix.stackexchange.com/a/586378
+my-backward-kill-word () {
+    # Add pipe, colon, comma, single/double quotes to word chars
+    local WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>|:,"'"'"
+    zle -f kill # Append to the kill ring on subsequent kills.
+    zle backward-kill-word
+}
+zle -N my-backward-kill-word
+bindkey '^w' my-backward-kill-word
+
+bindkey "^G" remove_last_history  # Ctrl+G will now remove the last command

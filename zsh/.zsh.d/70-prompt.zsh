@@ -43,12 +43,17 @@ function prompt_user_at_host {
 
 
 function git_initials {
-  initials=$(git config --get user.initials)
-  if [[ -n "${initials}" ]]; then
-    echo "%{%F{red}%}${initials}%{$reset_color%} "
+  git_root=$(git rev-parse --show-toplevel 2> /dev/null)
+  if [ "$?" -eq 0 ]; then
+    if git status > /dev/null 2>&1; then
+      initials=$(git mob-print --initials)
+      if [[ -n "${initials}" ]]; then
+        echo "%{%F{red}%}with ${initials}%{$reset_color%} "
+      fi
+    fi
   fi
 }
 
 # Prompt
 
-PROMPT='$(prompt_user_at_host)$(git_initials)${vcs_info_msg_0_# }%{$reset_color%}%{%b%f%}%{%F{blue}%}$(truncated_pwd 3)%f%b ${VI_MODE_PROMPT} '
+PROMPT='$(prompt_user_at_host)${vcs_info_msg_0_# }$(git_initials)%{$reset_color%}%{%b%f%}%{%F{blue}%}$(truncated_pwd 3)%f%b ${VI_MODE_PROMPT} '
