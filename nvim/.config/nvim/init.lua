@@ -19,6 +19,7 @@ require("lazy").setup({
   {'folke/tokyonight.nvim', lazy = false, priority = 1000},
   {"catppuccin/nvim", name = "catppuccin", priority = 1000},
   {"ellisonleao/gruvbox.nvim", priority = 1000},
+  {"RRethy/base16-nvim", priority = 1000},
   -- Pretty
   "nvim-lualine/lualine.nvim",
   {"nvim-tree/nvim-web-devicons", lazy = true},
@@ -44,7 +45,7 @@ require("lazy").setup({
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
   -- Terminal Integration
-  "knubie/vim-kitty-navigator",
+  { "knubie/vim-kitty-navigator", lazy = false },
   -- Git Integration
   "tpope/vim-fugitive",
   "lewis6991/gitsigns.nvim",
@@ -457,56 +458,33 @@ require("luasnip.loaders.from_snipmate").lazy_load()
 --vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 vim.opt.completeopt = {'menuone', 'noselect', 'fuzzy', 'nosort'}
 
-require'lspconfig'.clojure_lsp.setup{}
-require'lspconfig'.bashls.setup{}
-require'lspconfig'.sqlls.setup{}
-require'lspconfig'.lua_ls.setup {
+vim.lsp.config('*', {
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+})
+
+vim.lsp.config('clojure_lsp', {})
+vim.lsp.config('bashls', {})
+vim.lsp.config('sqlls', {})
+vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
+      runtime = { version = 'LuaJIT' },
+      diagnostics = { globals = {'vim'} },
       workspace = {
-        -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file("", true),
         checkThirdParty = false,
       },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
+      telemetry = { enable = false },
     },
   },
-}
+})
 
-local lspconfig = require('lspconfig')
-local lsp_defaults = lspconfig.util.default_config
-lsp_defaults.capabilities = vim.tbl_deep_extend(
-  'force',
-  lsp_defaults.capabilities,
-  require('cmp_nvim_lsp').default_capabilities()
-)
+vim.lsp.enable({ 'clojure_lsp', 'bashls', 'sqlls', 'lua_ls' })
 
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 --vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-
-local signs = {
-  Error = "",
-  Warn = "",
-  Info = "",
-  Hint = ""
-}
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover, {
@@ -523,15 +501,26 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 vim.diagnostic.config {
   float = { border = "rounded" },
   virtual_text = false,
-  signs = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN]  = "",
+      [vim.diagnostic.severity.INFO]  = "",
+      [vim.diagnostic.severity.HINT]  = "",
+    },
+  },
   update_in_insert = false,
   underline = true,
   severity_sort = true
 }
 
-require('lspconfig.ui.windows').default_options = {
-  border = "rounded"
-}
+-- LspInfo window border
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'lspinfo',
+  callback = function()
+    vim.api.nvim_win_set_config(0, { border = 'rounded' })
+  end,
+})
 
 --vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
 vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white]]
@@ -580,7 +569,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'base16',
+    theme = 'auto',
     component_separators = { left = '|', right = '|'},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
@@ -625,6 +614,7 @@ vim.opt.termguicolors = true
 --vim.cmd.colorscheme('tokyonight')
 --vim.cmd.colorscheme('base16-tomorrow-night')
 vim.cmd.colorscheme('catppuccin-mocha')
+--vim.cmd.colorscheme('base16-gruvbox-dark-medium')
 vim.api.nvim_set_hl(0, 'Comment', { italic=true })
 vim.api.nvim_set_hl(0, 'MatchParen', { fg='orange', bold=true })
 
@@ -767,3 +757,22 @@ vim.keymap.set('n', '<leader>yp', function()
   vim.fn.setreg('+', path)
   print('Copied: ' .. path)
 end, { desc = 'Copy relative file path' })
+
+vim.keymap.set('n', '<leader>yl', function()
+  local path = vim.fn.expand('%:.') .. ':' .. vim.fn.line('.')
+  vim.fn.setreg('+', path)
+  print('Copied: ' .. path)
+end, { desc = 'Copy relative file path with line number' })
+
+vim.keymap.set('v', '<leader>yl', function()
+  local l1 = vim.fn.line('v')
+  local l2 = vim.fn.line('.')
+  local start = math.min(l1, l2)
+  local stop = math.max(l1, l2)
+  local path = vim.fn.expand('%:.')
+  local result = start == stop
+    and path .. ':' .. start
+    or path .. ':' .. start .. '-' .. stop
+  vim.fn.setreg('+', result)
+  print('Copied: ' .. result)
+end, { desc = 'Copy relative file path with line range' })
