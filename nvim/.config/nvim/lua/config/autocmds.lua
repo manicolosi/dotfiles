@@ -1,0 +1,2 @@
+-- Autocmds are added as their dependencies (LSP, colorscheme, plugins)
+-- come back online. Intentionally empty for now.
